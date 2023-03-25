@@ -7,6 +7,28 @@ export async function usernameValidate(values){
     return errors;
 }
 
+// VALIDATE PASSWORD
+export async function passwordValidate(values){
+    const errors= passwordVerify({},values);
+
+    return errors;
+}
+
+// VALIDATE RESET PASSWORD
+export async function resetPasswordValidation(values){
+    const errors= passwordVerify({},values);
+    if(values.password !== values.confirm_pwd){
+        errors.exist= toast.error("Password didn't match")
+
+    }
+    return errors;
+}
+
+
+
+
+/* -----------------------------------------------------------*/
+
 //VALIDATE USER NAME
 function usernameVerify(error={},values){
     if(!values.username){
@@ -15,14 +37,6 @@ function usernameVerify(error={},values){
         error.message=toast.error("Invalid Username")
     }
     return error;
-}
-
-
-// VALIDATE PASSWORD
-export async function passwordValidate(values){
-    const errors= passwordVerify({},values);
-
-    return errors;
 }
 
 
