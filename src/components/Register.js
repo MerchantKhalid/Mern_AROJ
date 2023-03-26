@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import avatar from "../assets/profile.png";
 import bg from '../assets/Background.png';
-import { usernameValidate } from '../helper/validate.js';
+import { registerValidation } from '../helper/validate.js';
 import convertToBase64 from '../helper/convert';
 
 
@@ -19,7 +19,7 @@ export default function Register() {
       username: "",
       password: "",
     },
-    validate: usernameValidate,
+    validate: registerValidation,
     validateOnBlur: false,
     validateOnChange: false,
     onSubmit: async values => {

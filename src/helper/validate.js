@@ -1,5 +1,14 @@
 import  toast  from "react-hot-toast";
 
+// VALIDATE REGISTER FORM
+export async function registerValidation(values){
+    const errors=usernameVerify({},values)
+    passwordVerify(errors,values);
+    emailVerify(errors,values);
+
+    return errors;
+}
+
 // VALIDATE LOGIN PAGE USERNAME
 export async function usernameValidate(values){
     const errors=usernameVerify({},values)
@@ -21,6 +30,12 @@ export async function resetPasswordValidation(values){
         errors.exist= toast.error("Password didn't match")
 
     }
+    return errors;
+}
+
+// PROFILE VALIDATION
+export async function profileValidation(values){
+    const errors= emailVerify({},values)
     return errors;
 }
 
@@ -55,4 +70,17 @@ function passwordVerify(error={},values){
         error.password= toast.error("Password must contain a special character")
     }
     return error;
+}
+
+// VALIDATE EMAIL
+function emailVerify(error={},values){
+    if(!values.email){
+        error.email=toast.error("Email is required")
+    }else if(values.email.includes(' ')){
+        error.email= toast.error("Email can't be empty")
+    }else if(!/[`@#$%&*()-+_=\:",.;?<>]/.test(values.email)){
+        error.email=toast.error("Invalid Email")
+    }
+    return error;
+
 }
